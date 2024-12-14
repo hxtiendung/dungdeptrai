@@ -116,3 +116,40 @@ Button2.MouseButton1Click:Connect(function()
         end
     end
 end)
+
+-- Các hàm cập nhật thông tin
+function getfm()
+    if game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149431" then
+        return " | Full Moon"
+    elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149052" then
+        return " | Next Night"
+    else
+        return " | Bad Moon"
+    end
+end
+
+function getmirage()
+    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+        return " | 🟢"
+    else
+        return " | 🔴"
+    end
+end
+
+function checkgatcan()
+    local a = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("CheckTempleDoor")
+    if a then
+        return " | Pulled"
+    else
+        return " | No"
+    end
+end
+
+spawn(function()
+    while wait() do
+        game:GetService("Players").LocalPlayer.PlayerGui.Honglamx.Frame.TextLabel.Text = 
+            math.floor(game.Lighting.ClockTime) .. " | " .. 
+            game.Players.NumPlayers .. "/" .. 
+            game.Players.MaxPlayers .. getfm() .. getmirage() .. checkgatcan()
+    end
+end)
