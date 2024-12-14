@@ -11,140 +11,24 @@ pcall(function()
     end
 end)
 
--- Tạo GUI
 local playerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = playerGui
 screenGui.Name = "Honglamx"
 
--- Frame chính
+-- Tạo Frame cho GUI
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 300, 0, 40)
-frame.Position = UDim2.new(0.35, 0, -0.055, 0)
+frame.Position = UDim2.new(0.35, 0, -0.055, 0)  -- Fixed Y position
 frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 frame.Parent = screenGui
 
 local UIcorner = Instance.new("UICorner")
 UIcorner.Parent = frame
 
--- Text Label
+-- Tạo Text Label
 local Text = Instance.new("TextLabel")
 Text.Size = UDim2.new(0, 300, 0, 40)
 Text.Position = UDim2.new(0, 0, 0, 0)
 Text.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-Text.Font = Enum.Font.SourceSans
-Text.Text = "Hi"
-Text.Parent = frame
-Text.TextWrapped = true
-Text.TextScaled = false
-Text.TextSize = 20
-Text.TextStrokeTransparency = 0.5
-Text.TextStrokeColor3 = Color3.new(0, 0, 0)
-
--- TextBox (Input Job ID)
-local frame2 = Instance.new("Frame")
-frame2.Name = "JoinSv"
-frame2.Size = UDim2.new(0, 200, 0, 40)
-frame2.Position = UDim2.new(0.35, 0, 0.055, 0)
-frame2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-frame2.Parent = screenGui
-
-local Text2 = Instance.new("TextBox")
-Text2.Size = UDim2.new(0, 200, 0, 40)
-Text2.Position = UDim2.new(0, 0, 0, 0)
-Text2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Text2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Text2.Font = Enum.Font.SourceSans
-Text2.Text = "Input Job Id"
-Text2.Parent = frame2
-Text2.TextWrapped = true
-Text2.TextScaled = false
-Text2.TextSize = 20
-Text2.TextStrokeTransparency = 0.5
-Text2.TextStrokeColor3 = Color3.new(0, 0, 0)
-
--- Button: Copy Job ID
-local Button = Instance.new("TextButton")
-Button.Size = UDim2.new(0, 101, 0, 40)
-Button.Position = UDim2.new(0.58, 0, 0.06, 0)
-Button.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-Button.Font = Enum.Font.SourceSans
-Button.Text = "Copy Job Id"
-Button.Parent = screenGui
-Button.TextWrapped = true
-Button.TextScaled = false
-Button.TextSize = 20
-Button.TextStrokeTransparency = 0.5
-Button.TextStrokeColor3 = Color3.new(0, 0, 0)
-
-Button.MouseButton1Click:Connect(function()
-    setclipboard(tostring(game.JobId))
-end)
-
--- Button: Join Server
-local Button2 = Instance.new("TextButton")
-Button2.Size = UDim2.new(0, 101, 0, 40)
-Button2.Position = UDim2.new(0.7, 0, 0.06, 0)
-Button2.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Button2.TextColor3 = Color3.fromRGB(255, 255, 255)
-Button2.Font = Enum.Font.SourceSans
-Button2.Text = "Join server"
-Button2.Parent = screenGui
-Button2.TextWrapped = true
-Button2.TextScaled = false
-Button2.TextSize = 20
-Button2.TextStrokeTransparency = 0.5
-Button2.TextStrokeColor3 = Color3.new(0, 0, 0)
-
--- Decrypt function (Load from URL)
-local Decrypt = loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/refs/heads/main/zzdognob.lua"))()
-
-Button2.MouseButton1Click:Connect(function()
-    local jobIdInput = game.Players.LocalPlayer.PlayerGui.Honglamx.JoinSv.TextBox.Text
-    if jobIdInput and jobIdInput ~= "" then
-        -- Nếu người chơi nhập Job ID thủ công, sử dụng Job ID đó
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, jobIdInput, game.Players.LocalPlayer)
-    else
-        -- Nếu không có Job ID thủ công, sử dụng Decrypt
-        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,Decrypt(game:GetService("Players").LocalPlayer.PlayerGui.Honglamx.JoinSv.TextBox.Text), game.Players.LocalPlayer)
-    end
-end)
-
--- Các hàm cập nhật thông tin
-function getfm()
-    if game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149431" then
-        return " | Full Moon"
-    elseif game:GetService("Lighting").Sky.MoonTextureId == "http://www.roblox.com/asset/?id=9709149052" then
-        return " | Next Night"
-    else
-        return " | Bad Moon"
-    end
-end
-
-function getmirage()
-    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-        return " | 🟢"
-    else
-        return " | 🔴"
-    end
-end
-
-function checkgatcan()
-    local a = game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("CommF_"):InvokeServer("CheckTempleDoor")
-    if a then
-        return " | Pulled"
-    else
-        return " | No"
-    end
-end
-
-spawn(function()
-    while wait() do
-        game:GetService("Players").LocalPlayer.PlayerGui.Honglamx.Frame.TextLabel.Text = 
-            math.floor(game.Lighting.ClockTime) .. " | " .. 
-            game.Players.NumPlayers .. "/" .. 
-            game.Players.MaxPlayers .. getfm() .. getmirage() .. checkgatcan()
-    end
-end)
+Text.TextColor3 = Color3.fromRGB(255, 255, 255
