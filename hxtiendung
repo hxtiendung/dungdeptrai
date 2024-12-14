@@ -108,12 +108,7 @@ Button2.MouseButton1Click:Connect(function()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, jobIdInput, game.Players.LocalPlayer)
     else
         -- Nếu không có Job ID thủ công, sử dụng Decrypt
-        local decryptedJobId = Decrypt(game.Players.LocalPlayer.PlayerGui.Honglamx.JoinSv.TextBox.Text)
-        if decryptedJobId then
-            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, decryptedJobId, game.Players.LocalPlayer)
-        else
-            warn("Invalid Job ID or Decryption failed")
-        end
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,Decrypt(game:GetService("Players").LocalPlayer.PlayerGui.Honglamx.JoinSv.TextBox.Text), game.Players.LocalPlayer)
     end
 end)
 
