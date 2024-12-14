@@ -112,6 +112,8 @@ local Decrypt = loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiy
 
 Button2.MouseButton1Click:Connect(function()
     while wait() do
+        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, jobIdInput, game.Players.LocalPlayer)
+    else
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,Decrypt(game:GetService("Players").LocalPlayer.PlayerGui.Honglamx.JoinSv.TextBox.Text), game.Players.LocalPlayer)
     end
 end)
